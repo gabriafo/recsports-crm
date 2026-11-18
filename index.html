@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recsports | Inteligência & Arquitetura de CRM para iGaming</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              900: '#064e3b',
+            },
+            slate: {
+              850: '#151e2e',
+              900: '#0f172a',
+              950: '#090d16',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #090d16;
+      color: #f8fafc;
+    }
+    .glass-card {
+      background: rgba(21, 30, 46, 0.72);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+    }
+    .glass-card-highlight {
+      background: linear-gradient(145deg, rgba(16, 185, 129, 0.12), rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      background: #1e293b;
+      height: 6px;
+      border-radius: 999px;
+      outline: none;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #10b981;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+      transition: transform 0.15s ease;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+    .tab-active {
+      background-color: #10b981;
+      color: #052e16;
+      font-weight: 600;
+    }
+    @media print {
+      body { background: #ffffff; color: #0f172a; }
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-emerald-500 selection:text-slate-950">
+
+  <!-- Top Navigation Bar -->
+  <header class="sticky top-0 z-50 border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-slate-950 font-extrabold text-lg shadow-lg shadow-emerald-500/20">
+          R
+        </div>
+        <div>
+          <span class="font-bold tracking-tight text-white text-lg">RECSPORTS</span>
+          <span class="hidden sm:inline-block text-xs text-slate-400 ml-2 pl-2 border-l border-slate-700">Growth & CRM para iGaming</span>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-6 text-sm text-slate-300">
+        <a href="#diagnostico" class="hover:text-emerald-400 transition">1. Gargalos do Setor</a>
+        <a href="#simulador" class="hover:text-emerald-400 transition">2. Simulador de Custos</a>
+        <a href="#benchmark" class="hover:text-emerald-400 transition">3. Benchmark 10 Plataformas</a>
+        <a href="#arquitetura" class="hover:text-emerald-400 transition">4. Arquitetura Recsports</a>
+      </nav>
+
+      <div class="flex items-center gap-3 no-print">
+        <span class="hidden lg:inline-flex items-center gap-1.5 text-xs font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2.5 py-1 rounded-full">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          Tabelas Oficiais 2026
+        </span>
+        <button onclick="window.print()" class="text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">
+          Exportar PDF
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden pt-12 pb-16 sm:pt-16 sm:pb-20 border-b border-slate-800/60">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-emerald-900/20 via-slate-950 to-slate-950 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-700/80 text-xs font-medium text-emerald-400 mb-6">
+          Estudo de Viabilidade Técnica & Financeira • Operações de Apostas Esportivas e Cassino
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight mb-6">
+          Como escalar a retenção e o <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">FTD no iGaming</span> sem queimar margem em ferramentas erradas.
+        </h1>
+        <p class="text-base sm:text-lg text-slate-300 leading-relaxed mb-8">
+          Contratar um CRM tradicional para uma operação de apostas costuma gerar três problemas graves: <strong>bloqueio por políticas anti-gambling</strong>, cobrança por <strong>leads frios que nunca depositaram</strong> e faturas proibitivas na <strong>API Oficial do WhatsApp</strong>. Preparamos este estudo comparativo real para guiar a decisão da sua operação.
+        </p>
+      </div>
+
+      <!-- KPI Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+        <div class="glass-card rounded-xl p-5">
+          <div class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-1">Base de Referência</div>
+          <div class="text-2xl sm:text-3xl font-bold text-white">60.000 <span class="text-sm font-normal text-slate-400">leads</span></div>
+          <div class="text-xs text-slate-400 mt-2">Média de 60% a 70% de cadastros sem FTD (base fria)</div>
+        </div>
+        <div class="glass-card rounded-xl p-5">
+          <div class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-1">Tarifa Meta Marketing (BR)</div>
+          <div class="text-2xl sm:text-3xl font-bold text-amber-400">US$ 0,0625 <span class="text-sm font-normal text-slate-400">/msg</span></div>
+          <div class="text-xs text-slate-400 mt-2">~R$ 0,36 por disparo promocional entregue (Out/2026)</div>
+        </div>
+        <div class="glass-card rounded-xl p-5">
+          <div class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-1">Tarifa Meta Utilidade (BR)</div>
+          <div class="text-2xl sm:text-3xl font-bold text-emerald-400">US$ 0,0068 <span class="text-sm font-normal text-slate-400">/msg</span></div>
+          <div class="text-xs text-slate-400 mt-2">~R$ 0,04 para PIX pendente, saque e OTP (9x mais barato)</div>
+        </div>
+        <div class="glass-card rounded-xl p-5">
+          <div class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-1">Economia Arquitetura Híbrida</div>
+          <div class="text-2xl sm:text-3xl font-bold text-emerald-400">Até 82% <span class="text-sm font-normal text-slate-400">/mês</span></div>
+          <div class="text-xs text-slate-400 mt-2">Frente a CRMs SaaS tradicionais cobrados por contato</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: 3 Core Traps -->
+  <section id="diagnostico" class="py-16 border-b border-slate-800/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10">
+        <span class="text-xs font-mono uppercase tracking-wider text-emerald-400">01. Diagnóstico de Mercado</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Os 3 Gargalos Invisíveis do CRM no iGaming</h2>
+        <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-2xl">Por que plataformas líderes no e-commerce tradicional falham ou drenam o caixa de casas de apostas.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass-card rounded-2xl p-6 border-t-2 border-t-rose-500">
+          <div class="w-10 h-10 rounded-lg bg-rose-500/10 text-rose-400 flex items-center justify-center font-bold mb-4">01</div>
+          <h3 class="text-lg font-bold text-white mb-2">A Armadilha do Custo por Lead</h3>
+          <p class="text-sm text-slate-300 leading-relaxed mb-4">
+            No iGaming, até <strong>70% da base cadastrada é composta por curiosos</strong> que criaram conta mas não fizeram o primeiro depósito (FTD). Ferramentas como ActiveCampaign, Klaviyo e RD Station cobram pelo tamanho total da lista armazenada — você paga caro todos os meses por contatos dormentes.
+          </p>
+          <div class="text-xs font-mono text-rose-300 bg-rose-950/40 px-3 py-2 rounded-lg border border-rose-500/20">
+            Solução: Cobrança por envio (Brevo/SES) ou Usuário Ativo (MAU).
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 border-t-2 border-t-amber-500">
+          <div class="w-10 h-10 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold mb-4">02</div>
+          <h3 class="text-lg font-bold text-white mb-2">Risco de Banimento (Compliance)</h3>
+          <p class="text-sm text-slate-300 leading-relaxed mb-4">
+            Plataformas comerciais possuem cláusulas rígidas (AUP) proibindo apostas e jogos de azar. Ao disparar campanhas com termos como <em>"bônus"</em>, <em>"odds"</em> ou <em>"giros grátis"</em>, a conta corre risco real de bloqueio sumário e perda das automações sem reembolso.
+          </p>
+          <div class="text-xs font-mono text-amber-300 bg-amber-950/40 px-3 py-2 rounded-lg border border-amber-500/20">
+            Solução: Backoffice nativo + infraestrutura própria com IP dedicado.
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 border-t-2 border-t-emerald-500">
+          <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold mb-4">03</div>
+          <h3 class="text-lg font-bold text-white mb-2">Cegueira Transacional em Tempo Real</h3>
+          <p class="text-sm text-slate-300 leading-relaxed mb-4">
+            Um CRM externo não enxerga o banco de dados da casa de apostas sem desenvolvimento de <em>webhooks</em>. Se o jogador gera um PIX às 14h00 e paga às 14h02, um CRM mal integrado dispara cobrança às 14h05, destruindo a experiência e aumentando descadastros.
+          </p>
+          <div class="text-xs font-mono text-emerald-300 bg-emerald-950/40 px-3 py-2 rounded-lg border border-emerald-500/20">
+            Solução: Gatilhos financeiros nativos no Backoffice + API integrada.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Interactive Cost Simulator -->
+  <section id="simulador" class="py-16 border-b border-slate-800/60 bg-slate-900/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-wider text-emerald-400">02. Simulador Financeiro Interativo</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Projeção de Custo Mensal por Cenário</h2>
+          <p class="text-slate-400 text-sm sm:text-base mt-2">Ajuste os parâmetros da sua operação para visualizar o impacto real no caixa (Câmbio ref.: US$ 1 = R$ 5,80).</p>
+        </div>
+        <button onclick="resetSimulator()" class="self-start md:self-auto text-xs font-mono text-slate-300 hover:text-white bg-slate-800 px-3 py-2 rounded-lg border border-slate-700 transition">
+          Restaurar Padrão (60k Leads)
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Controls -->
+        <div class="lg:col-span-5 glass-card rounded-2xl p-6 space-y-6">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <label class="text-sm font-medium text-slate-200">Tamanho Total da Base (Leads)</label>
+              <span id="val-leads" class="font-mono text-sm font-bold text-emerald-400 bg-emerald-950/80 px-2.5 py-0.5 rounded border border-emerald-500/30">60.000</span>
+            </div>
+            <input type="range" id="input-leads" min="10000" max="200000" step="5000" value="60000" class="w-full" />
+            <div class="flex justify-between text-[11px] text-slate-500 font-mono mt-1">
+              <span>10k</span>
+              <span>60k</span>
+              <span>120k</span>
+              <span>200k</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <label class="text-sm font-medium text-slate-200">Disparos de E-mail / Mês</label>
+              <span id="val-emails" class="font-mono text-sm font-bold text-emerald-400 bg-emerald-950/80 px-2.5 py-0.5 rounded border border-emerald-500/30">300.000</span>
+            </div>
+            <input type="range" id="input-emails" min="50000" max="1500000" step="50000" value="300000" class="w-full" />
+            <div class="flex justify-between text-[11px] text-slate-500 font-mono mt-1">
+              <span>50k</span>
+              <span>300k</span>
+              <span>800k</span>
+              <span>1.5M</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <label class="text-sm font-medium text-slate-200">WhatsApp Marketing / Mês (Reativação)</label>
+              <span id="val-wa-mkt" class="font-mono text-sm font-bold text-amber-400 bg-amber-950/80 px-2.5 py-0.5 rounded border border-amber-500/30">15.000</span>
+            </div>
+            <input type="range" id="input-wa-mkt" min="0" max="60000" step="2500" value="15000" class="w-full" />
+            <p class="text-[11px] text-slate-400 mt-1">Na API Oficial Meta custa US$ 0,0625/msg. Na Stack Híbrida roda via esteira dedicada sem custo por disparo.</p>
+          </div>
+
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <label class="text-sm font-medium text-slate-200">WhatsApp Utilidade / Mês (PIX / Saque)</label>
+              <span id="val-wa-util" class="font-mono text-sm font-bold text-sky-400 bg-sky-950/80 px-2.5 py-0.5 rounded border border-sky-500/30">5.000</span>
+            </div>
+            <input type="range" id="input-wa-util" min="0" max="30000" step="1000" value="5000" class="w-full" />
+            <p class="text-[11px] text-slate-400 mt-1">Tarifa Meta Utilidade: US$ 0,0068/msg (~R$ 0,04).</p>
+          </div>
+        </div>
+
+        <!-- Visual Comparison Bars -->
+        <div class="lg:col-span-7 glass-card rounded-2xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-base font-bold text-white">Custo Mensal Estimado (Ferramentas + Disparos)</h3>
+              <span class="text-xs text-slate-400 font-mono">Valores em R$/mês</span>
+            </div>
+
+            <div id="chart-container" class="space-y-4">
+              <!-- Rendered dynamically by JS -->
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="text-xs text-slate-400">
+              Economia mensal estimada da <strong class="text-emerald-400">Arquitetura Híbrida Recsports</strong> vs. ActiveCampaign:
+            </div>
+            <div id="savings-badge" class="font-mono text-base font-bold text-emerald-400 bg-emerald-950/80 border border-emerald-500/40 px-3 py-1.5 rounded-lg self-start sm:self-auto">
+              R$ 11.400 / mês
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Full Benchmark Table -->
+  <section id="benchmark" class="py-16 border-b border-slate-800/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-wider text-emerald-400">03. Raio-X Completo do Mercado</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Comparativo Real: 10 Plataformas (Base 60k Leads)</h2>
+          <p class="text-slate-400 text-sm sm:text-base mt-2">Análise detalhada de precificação, limites de envio, custos de WhatsApp e aderência ao setor de apostas.</p>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="flex flex-wrap gap-2 no-print" id="filter-buttons">
+          <button data-filter="all" class="filter-btn tab-active text-xs px-3 py-1.5 rounded-lg border border-slate-700 transition">Todas (10)</button>
+          <button data-filter="tradicional" class="filter-btn bg-slate-900 text-slate-300 hover:text-white text-xs px-3 py-1.5 rounded-lg border border-slate-700 transition">SaaS Tradicional</button>
+          <button data-filter="eventos" class="filter-btn bg-slate-900 text-slate-300 hover:text-white text-xs px-3 py-1.5 rounded-lg border border-slate-700 transition">Orientado a Eventos</button>
+          <button data-filter="igaming" class="filter-btn bg-slate-900 text-slate-300 hover:text-white text-xs px-3 py-1.5 rounded-lg border border-slate-700 transition">iGaming & Infra Própria</button>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-2xl overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-slate-800 bg-slate-900/90 text-[11px] font-mono uppercase tracking-wider text-slate-400">
+                <th class="py-4 px-4">Plataforma</th>
+                <th class="py-4 px-4">Modelo de Cobrança</th>
+                <th class="py-4 px-4">Assinatura Base (60k)</th>
+                <th class="py-4 px-4">Franquia E-mail/Mês</th>
+                <th class="py-4 px-4">WhatsApp (20k msgs)*</th>
+                <th class="py-4 px-4">Risco iGaming</th>
+                <th class="py-4 px-4">Dados da Casa</th>
+              </tr>
+            </thead>
+            <tbody id="platforms-tbody" class="divide-y divide-slate-800/70 text-sm">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+        <div class="bg-slate-950/70 px-4 py-3 border-t border-slate-800/80 text-xs text-slate-400 flex flex-col sm:flex-row justify-between gap-2">
+          <span>*Cálculo WhatsApp Oficial: 15.000 msgs Marketing (US$ 0,0625) + 5.000 Utilidade (US$ 0,0068) = ~R$ 5.635 só em tarifas Meta + taxas de plataforma.</span>
+          <span class="font-mono text-slate-500">Fonte: Tabelas Públicas 2026</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Recsports Recommended Architecture -->
+  <section id="arquitetura" class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10">
+        <span class="text-xs font-mono uppercase tracking-wider text-emerald-400">04. Solução Recomendada</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Arquitetura Híbrida de Alta Performance Recsports</h2>
+        <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-3xl">
+          Em vez de depender de uma única ferramenta cara e restritiva, estruturamos o CRM da sua operação em <strong>3 camadas especializadas</strong> que maximizam conversão e protegem sua margem.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+        <!-- Layer 1 -->
+        <div class="glass-card-highlight rounded-2xl p-6 relative">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400 bg-emerald-950 px-2.5 py-1 rounded border border-emerald-500/30">Camada 1 • Dia 1</span>
+            <span class="text-xs font-mono text-slate-400">Custo: R$ 0 extra</span>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Gatilhos Nativos do Backoffice</h3>
+          <p class="text-sm text-slate-300 leading-relaxed mb-4">
+            Aproveitamento imediato dos eventos transacionais que já existem na plataforma da casa de apostas, sem esperar semanas por integrações complexas.
+          </p>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✓</span> Recuperação de PIX gerado e não pago (15 min)</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✓</span> Régua de boas-vindas para cadastro sem FTD</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✓</span> Alertas de retenção para jogadores VIP inativos</li>
+          </ul>
+        </div>
+
+        <!-- Layer 2 -->
+        <div class="glass-card rounded-2xl p-6 relative">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-sky-400 bg-sky-950 px-2.5 py-1 rounded border border-sky-500/30">Camada 2 • Escala</span>
+            <span class="text-xs font-mono text-slate-400">~R$ 250 - R$ 1.500/mês</span>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Motor de E-mail & Reativação</h3>
+          <p class="text-sm text-slate-300 leading-relaxed mb-4">
+            Infraestrutura dedicada (<strong>Mautic + Amazon SES</strong> ou <strong>Brevo</strong> por volume) com domínio e IPs aquecidos para garantir entrega na caixa principal.
+          </p>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li class="flex items-start gap-2"><span class="text-sky-400 font-bold">✓</span> Disparo para toda a base de 60k leads a preço de custo</li>
+            <li class="flex items-start gap-2"><span class="text-sky-400 font-bold">✓</span> Zero penalidade por armazenar leads frios</li>
+            <li class="flex items-start gap-2"><span class="text-sky-400 font-bold">✓</span> Templates de alta conversão para rodadas e torneios</li>
+          </ul>
+        </div>
+
+        <!-- Layer 3 -->
+        <div class="glass-card rounded-2xl p-6 relative">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-amber-400 bg-amber-950 px-2.5 py-1 rounded border border-amber-500/30">Camada 3 • Dual-Track</span>
+            <span class="text-xs font-mono text-slate-400">~R$ 550 - R$ 800/mês</span>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">WhatsApp Inteligente (2 Vias)</h3>
+          <p class="text-sm text-slate-300 leading-relaxed mb-4">
+            Separação estratégica entre canais oficiais e canais de aquisição/reativação para eliminar o custo de US$ 0,0625 por mensagem promocional.
+          </p>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li class="flex items-start gap-2"><span class="text-amber-400 font-bold">✓</span> <strong>API Oficial Meta:</strong> Só para Utilidade (R$ 0,04) e Suporte VIP</li>
+            <li class="flex items-start gap-2"><span class="text-amber-400 font-bold">✓</span> <strong>Esteira Dedicada:</strong> Reativação em massa da base fria sem tarifa por disparo</li>
+            <li class="flex items-start gap-2"><span class="text-amber-400 font-bold">✓</span> Blindagem contra bloqueios no número principal da marca</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Roadmap Timeline -->
+      <div class="glass-card rounded-2xl p-6 sm:p-8">
+        <h3 class="text-lg font-bold text-white mb-6">Cronograma de Implementação em 3 Fases (Sem Interromper a Operação)</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="border-l-2 border-emerald-500 pl-4">
+            <div class="text-xs font-mono text-emerald-400 mb-1">SEMANAS 1 A 2 • QUICK WINS</div>
+            <h4 class="font-bold text-white text-base mb-1">Ativação Imediata & Higienização</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Segmentação da base de 60k leads (FTD pendente, ativos, churn), ativação das réguas nativas do backoffice e início do aquecimento (warmup) do domínio de envio.
+            </p>
+          </div>
+          <div class="border-l-2 border-sky-500 pl-4">
+            <div class="text-xs font-mono text-sky-400 mb-1">SEMANAS 3 A 4 • ESCALA DE CANAIS</div>
+            <h4 class="font-bold text-white text-base mb-1">Implantação do Motor Multicanal</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Entrada em produção das campanhas de e-mail de alta entregabilidade e operação da esteira de WhatsApp para reativação de cadastros sem depósito.
+            </p>
+          </div>
+          <div class="border-l-2 border-purple-500 pl-4">
+            <div class="text-xs font-mono text-purple-400 mb-1">MÊS 2+ • OTIMIZAÇÃO DE LTV</div>
+            <h4 class="font-bold text-white text-base mb-1">Automação Comportamental & VIP</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Integração de eventos em tempo real via webhooks, jornadas personalizadas por esporte/cassino favorito e acompanhamento contínuo de ROI por campanha.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800/80 bg-slate-950 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-300">RECSPORTS</span>
+        <span>• Inteligência Comercial, Retenção e CRM para Operações de iGaming</span>
+      </div>
+      <div class="font-mono">
+        Documento Executivo • Dados de Mercado 2026
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const EXCHANGE_RATE = 5.80;
+    const META_MKT_USD = 0.0625;
+    const META_UTIL_USD = 0.0068;
+
+    const platformsData = [
+      {
+        name: "ActiveCampaign (Pro)",
+        category: "tradicional",
+        billing: "Por contato armazenado",
+        basePrice60k: "R$ 6.400 – R$ 7.500",
+        emailLimit: "720.000 / mês",
+        waCost20k: "~R$ 6.300 (Add-on + Meta)",
+        risk: "Crítico",
+        riskColor: "rose",
+        dataAccess: "Exige Dev / Webhooks"
+      },
+      {
+        name: "Klaviyo (Email)",
+        category: "eventos",
+        billing: "Por perfil ativo",
+        basePrice60k: "~R$ 4.990",
+        emailLimit: "600.000 / mês",
+        waCost20k: "~R$ 6.000+ (Créditos + Meta)",
+        risk: "Alto",
+        riskColor: "amber",
+        dataAccess: "Exige Dev / Webhooks"
+      },
+      {
+        name: "Customer.io (Essentials)",
+        category: "eventos",
+        billing: "Por perfil único",
+        basePrice60k: "~R$ 3.450",
+        emailLimit: "1.000.000 / mês",
+        waCost20k: "~R$ 5.800 (Twilio/Meta)",
+        risk: "Moderado",
+        riskColor: "amber",
+        dataAccess: "Exige Dev / Webhooks"
+      },
+      {
+        name: "RD Station (Pro)",
+        category: "tradicional",
+        billing: "Por lead ativo + Setup",
+        basePrice60k: "~R$ 3.200 (+R$ 1.499 setup)",
+        emailLimit: "900.000 / mês",
+        waCost20k: "~R$ 6.200 (Conversas + Meta)",
+        risk: "Crítico",
+        riskColor: "rose",
+        dataAccess: "Exige Dev / Webhooks"
+      },
+      {
+        name: "MailerLite (Power)",
+        category: "tradicional",
+        billing: "Por inscrito ativo",
+        basePrice60k: "~R$ 2.840",
+        emailLimit: "1.200.000 / mês",
+        waCost20k: "Não possui nativo",
+        risk: "Crítico",
+        riskColor: "rose",
+        dataAccess: "Exige Dev / Webhooks"
+      },
+      {
+        name: "Brevo (Standard/Pro)",
+        category: "tradicional",
+        billing: "Por volume de envio",
+        basePrice60k: "R$ 1.500 – R$ 2.600",
+        emailLimit: "300k a 10M / mês",
+        waCost20k: "~R$ 5.800 (Tarifa Meta)",
+        risk: "Moderado",
+        riskColor: "amber",
+        dataAccess: "Exige Dev / Webhooks"
+      },
+      {
+        name: "CleverTap (Core)",
+        category: "eventos",
+        billing: "Por Usuário Ativo (MAU)",
+        basePrice60k: "R$ 450 – R$ 1.450",
+        emailLimit: "Sob demanda",
+        waCost20k: "~R$ 5.800 (Parceiros Meta)",
+        risk: "Baixo",
+        riskColor: "emerald",
+        dataAccess: "Exige SDK / API"
+      },
+      {
+        name: "Fast Track CRM",
+        category: "igaming",
+        billing: "Jogador Ativo / % GGR",
+        basePrice60k: "R$ 15.500 – R$ 31.000+",
+        emailLimit: "Ilimitado / Custom",
+        waCost20k: "Customizado",
+        risk: "Zero (iGaming)",
+        riskColor: "emerald",
+        dataAccess: "100% Nativa (B2B)"
+      },
+      {
+        name: "Stack Open-Source (Mautic+SES)",
+        category: "igaming",
+        billing: "Infraestrutura (VPS)",
+        basePrice60k: "R$ 700 – R$ 1.200",
+        emailLimit: "Ilimitado (~R$ 0,90/mil)",
+        waCost20k: "Incluso (Esteira Própria)",
+        risk: "Zero (Soberania)",
+        riskColor: "emerald",
+        dataAccess: "Exige Dev / Webhooks"
+      },
+      {
+        name: "Backoffice Nativo + Híbrido Recsports",
+        category: "igaming",
+        billing: "Nativo + Infra Enxuta",
+        basePrice60k: "R$ 0 a R$ 1.200",
+        emailLimit: "Sob demanda (SES/Brevo)",
+        waCost20k: "~R$ 200 (Só Utilidade Meta)",
+        risk: "Zero (Blindado)",
+        riskColor: "emerald",
+        dataAccess: "100% Nativa + API",
+        highlight: true
+      }
+    ];
+
+    function renderTable(filter = 'all') {
+      const tbody = document.getElementById('platforms-tbody');
+      tbody.innerHTML = '';
+
+      const filtered = filter === 'all'
+        ? platformsData
+        : platformsData.filter(p => p.category === filter);
+
+      filtered.forEach(p => {
+        const badgeClasses = {
+          rose: 'bg-rose-950/80 text-rose-400 border-rose-500/30',
+          amber: 'bg-amber-950/80 text-amber-400 border-amber-500/30',
+          emerald: 'bg-emerald-950/80 text-emerald-400 border-emerald-500/30'
+        }[p.riskColor];
+
+        const rowClass = p.highlight
+          ? 'bg-emerald-950/25 hover:bg-emerald-950/40'
+          : 'hover:bg-slate-900/50';
+
+        const tr = document.createElement('tr');
+        tr.className = `${rowClass} transition`;
+        tr.innerHTML = `
+          <td class="py-3.5 px-4 font-semibold text-white">
+            <div class="flex items-center gap-2">
+              <span>${p.name}</span>
+              ${p.highlight ? '<span class="text-[10px] font-mono uppercase bg-emerald-500 text-slate-950 font-bold px-1.5 py-0.5 rounded">Recomendado</span>' : ''}
+            </div>
+          </td>
+          <td class="py-3.5 px-4 text-slate-300 text-xs">${p.billing}</td>
+          <td class="py-3.5 px-4 font-mono text-xs ${p.highlight ? 'text-emerald-400 font-bold' : 'text-slate-200'}">${p.basePrice60k}</td>
+          <td class="py-3.5 px-4 font-mono text-xs text-slate-300">${p.emailLimit}</td>
+          <td class="py-3.5 px-4 font-mono text-xs text-slate-300">${p.waCost20k}</td>
+          <td class="py-3.5 px-4">
+            <span class="inline-block text-[11px] font-mono px-2 py-0.5 rounded border ${badgeClasses}">${p.risk}</span>
+          </td>
+          <td class="py-3.5 px-4 text-xs ${p.dataAccess.includes('100%') ? 'text-emerald-400 font-medium' : 'text-slate-400'}">${p.dataAccess}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.remove('tab-active');
+          b.classList.add('bg-slate-900', 'text-slate-300');
+        });
+        btn.classList.add('tab-active');
+        btn.classList.remove('bg-slate-900', 'text-slate-300');
+        renderTable(btn.dataset.filter);
+      });
+    });
+
+    // Simulator Logic
+    const inputLeads = document.getElementById('input-leads');
+    const inputEmails = document.getElementById('input-emails');
+    const inputWaMkt = document.getElementById('input-wa-mkt');
+    const inputWaUtil = document.getElementById('input-wa-util');
+
+    function formatBRL(val) {
+      return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+    }
+
+    function updateSimulator() {
+      const leads = parseInt(inputLeads.value);
+      const emails = parseInt(inputEmails.value);
+      const waMkt = parseInt(inputWaMkt.value);
+      const waUtil = parseInt(inputWaUtil.value);
+
+      document.getElementById('val-leads').textContent = leads.toLocaleString('pt-BR');
+      document.getElementById('val-emails').textContent = emails.toLocaleString('pt-BR');
+      document.getElementById('val-wa-mkt').textContent = waMkt.toLocaleString('pt-BR');
+      document.getElementById('val-wa-util').textContent = waUtil.toLocaleString('pt-BR');
+
+      // Official Meta WhatsApp cost in BRL
+      const metaOfficialCostBRL = ((waMkt * META_MKT_USD) + (waUtil * META_UTIL_USD)) * EXCHANGE_RATE;
+      // Only Utility on Meta Official
+      const metaUtilityOnlyBRL = (waUtil * META_UTIL_USD) * EXCHANGE_RATE;
+
+      // 1. ActiveCampaign Pro (scales strongly with contacts)
+      const acBaseUSD = leads <= 25000 ? 650 : leads <= 50000 ? 969 : 969 + ((leads - 50000) / 10000) * 180;
+      const acTotal = (acBaseUSD + 99) * EXCHANGE_RATE + metaOfficialCostBRL;
+
+      // 2. Klaviyo (scales with active profiles)
+      const klaviyoBaseUSD = leads <= 25000 ? 400 : leads <= 50000 ? 720 : 860 + ((leads - 60000) / 10000) * 120;
+      const klaviyoTotal = (klaviyoBaseUSD * EXCHANGE_RATE) + metaOfficialCostBRL;
+
+      // 3. Customer.io Essentials ($505 up to 50k + $0.009/extra profile)
+      const cioExtra = Math.max(0, leads - 50000) * 0.009;
+      const cioTotal = ((505 + cioExtra) * EXCHANGE_RATE) + metaOfficialCostBRL;
+
+      // 4. Brevo (scales with email volume, not contacts)
+      const brevoBaseUSD = emails <= 100000 ? 82 : emails <= 300000 ? 240 : 449 + Math.max(0, (emails - 1000000) / 100000) * 45;
+      const brevoTotal = (brevoBaseUSD * EXCHANGE_RATE) + metaOfficialCostBRL;
+
+      // 5. Arquitetura Híbrida Recsports (Backoffice Nativo + SES/Mautic + Esteira WA + Meta Utilidade)
+      const sesCostBRL = (emails / 1000) * 0.16 * EXCHANGE_RATE;
+      const infraFixedBRL = waMkt > 0 ? 680 : 250; // VPS + Chips/Proxies if WA marketing active
+      const hybridTotal = infraFixedBRL + sesCostBRL + metaUtilityOnlyBRL;
+
+      const scenarios = [
+        { label: "ActiveCampaign Pro + API Oficial", cost: acTotal, color: "bg-rose-500", note: "Alto risco de bloqueio iGaming" },
+        { label: "Klaviyo + API Oficial", cost: klaviyoTotal, color: "bg-amber-500", note: "Cobra por leads frios na base" },
+        { label: "Customer.io + API Oficial", cost: cioTotal, color: "bg-sky-500", note: "Bom motor, mas WA Oficial encarece" },
+        { label: "Brevo (Por Envio) + API Oficial", cost: brevoTotal, color: "bg-indigo-500", note: "E-mail barato, WA Oficial caro" },
+        { label: "Arquitetura Híbrida Recsports", cost: hybridTotal, color: "bg-emerald-400", note: "Backoffice + SES + WA Dual-Track", highlight: true }
+      ];
+
+      const maxCost = Math.max(...scenarios.map(s => s.cost), 1000);
+      const container = document.getElementById('chart-container');
+      container.innerHTML = '';
+
+      scenarios.forEach(s => {
+        const pct = Math.min(100, Math.max(4, (s.cost / maxCost) * 100));
+        const item = document.createElement('div');
+        item.className = s.highlight ? 'p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/40' : '';
+        item.innerHTML = `
+          <div class="flex justify-between items-baseline mb-1.5">
+            <div>
+              <span class="text-xs sm:text-sm font-semibold ${s.highlight ? 'text-emerald-300' : 'text-slate-200'}">${s.label}</span>
+              <span class="hidden sm:inline text-[11px] text-slate-400 ml-2">(${s.note})</span>
+            </div>
+            <span class="font-mono text-sm font-bold ${s.highlight ? 'text-emerald-400' : 'text-white'}">${formatBRL(s.cost)}</span>
+          </div>
+          <div class="w-full bg-slate-800/80 rounded-full h-2.5 overflow-hidden">
+            <div class="${s.color} h-2.5 rounded-full transition-all duration-300" style="width: ${pct}%"></div>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+
+      const savings = Math.max(0, acTotal - hybridTotal);
+      document.getElementById('savings-badge').textContent = `${formatBRL(savings)} / mês`;
+    }
+
+    function resetSimulator() {
+      inputLeads.value = 60000;
+      inputEmails.value = 300000;
+      inputWaMkt.value = 15000;
+      inputWaUtil.value = 5000;
+      updateSimulator();
+    }
+
+    [inputLeads, inputEmails, inputWaMkt, inputWaUtil].forEach(el => {
+      el.addEventListener('input', updateSimulator);
+    });
+
+    // Init
+    renderTable('all');
+    updateSimulator();
+  </script>
+</body>
+</html>
